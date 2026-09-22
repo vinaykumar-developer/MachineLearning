@@ -1,0 +1,45 @@
+class MyLR:
+  def __init__(self):
+    self.m= 0
+    self.b=0
+
+  def fit(self,x_train,y_train):
+    num = 0
+    den = 0
+
+    for i in range(x_train.shape[0]):
+      num += (x_train[i]-x_train.mean()) * (y_train[i]-y_train.mean())
+      den += (x_train[i] - x_train.mean())**2
+    self.m=num/den
+
+    self.b=(y_train.mean()- self.m*(x_train.mean()))
+    print(self.m)
+    print(self.b)
+
+  def predict(self,x_test):
+    return self.m * x_test + self.b
+
+ #seprating input and output data as x and y
+
+x=df.iloc[:,0].values
+y=df.iloc[:,1].values
+
+#spiliting the data
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=2)
+
+# created object of my linear regration function that calculates LR asme as siketlearn fibrary using the same mathematical formula and logic from scratch
+lr=MyLR()
+
+# trained the model on the given data "placement.csv" provided with this 
+lr.fit(x_train,y_train)
+
+# last and very important part testing of the model for different values of cgpa and predicted the placement.
+print(lr.predict(x_test[0]))
+print(lr.predict(x_test[9]))
+print(lr.predict(x_test[69]))
+print(lr.predict(x_test[0111))
+
+
+
+#link of the csv file to perform linear regression on my MyLR model  
+#  https://github.com/campusx-official/100-days-of-machine-learning/blob/main/day48-simple-linear-regression/placement.csv
