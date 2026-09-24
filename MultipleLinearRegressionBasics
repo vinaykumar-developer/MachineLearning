@@ -1,0 +1,84 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_regression
+import plotly.express as px
+import plotly.graph_objects as go
+from sklearn.metrics import mean_absolute_error,mean_squared_error,r2_score
+x,y=make_regression(n_samples=100,n_features=2,n_targets=1,noise=50)
+
+n_sample-no of points
+n_features - no of columns
+n_informative -
+n_target - no of output colimns
+creatingh dataframe using the features and target
+df=pd.DataFrame({'feature1':x[:,0],'feature2':x[:,1],'target':y})
+fig=px.scatter_3d(df,x='feature1',y='feature2',z='target')
+fig.show()
+**split** the data in to train and test and then train the model using train data
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=3)
+from sklearn.linear_model import LinearRegression
+lr=LinearRegression()
+lr.fit(x_train,y_train)
+y_pred=lr.predict(x_test)
+print("mae",mean_absolute_error(y_test,y_pred))
+print("mse",mean_squared_error(y_test,y_pred))
+print("R2 score",r2_score(y_test,y_pred))
+x_surf = np.linspace(-5,5, 10)
+y_surf = np.linspace(-5,5, 10)
+xGrid, yGrid = np.meshgrid(x_surf, y_surf)
+
+final = np.vstack((xGrid.ravel(), yGrid.ravel())).T
+z_final = lr.predict(final).reshape(10, 10)
+z = z_final
+fig= px.scatter_3d(df,x='feature1',y='feature2',z='target')
+fig.add_trace(go.Surface(x=x_surf,y=y_surf,z=z))
+fig.show()
+lr.coef_
+# these are the coefficient beta1 and beta2
+lr.intercept_
+
+Mathematical implementaion of MLR
+from sklearn.datasets import load_diabetes
+x,y=load_diabetes(return_X_y=True)
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=2)
+from sklearn.linear_model import LinearRegression
+lr=LinearRegression()
+lr.fit(x_train,y_train)
+y_pred=lr.predict(x_test)
+y_pred
+from sklearn.metrics import r2_score
+lr.coef_ // these coefficient are further used to find loss function. and using the loss function we can calculate regression  mathematically 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
